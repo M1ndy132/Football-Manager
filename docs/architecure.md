@@ -73,6 +73,8 @@ football_manager/
 │       ├── test_matches.py
 │       └── test_venues.py
 │
+│
+└── docs/architecture.md # This document
 └── football.db                 # SQLite DB for development
 ```
 
@@ -171,3 +173,4 @@ football_manager/
 - Guide team members and ensure consistency
 - Set up database and migrations
 - Oversee CI/CD and code quality tools
+
