@@ -62,6 +62,61 @@ class Player(Base):
     __table_args__ = (
         CheckConstraint("age > 0", name="chk_player_age"),
     )   
-    
+
+class Coach(Base):
+    __tablename__ = "coaches"
+
+    id = Column(Integer, primary_key=True, index=True)
+    team_id = Column(Integer, nullable=False)
+    name = Column(String(100), nullable=False)
+    experience_years = Column(Integer, nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+    __table_args__ = (
+        CheckConstraint("experience_years >= 0", name="chk_coach_experience_years"),
+    )
+
+class Manager(Base):
+    __tablename__ = "managers"
+
+    id = Column(Integer, primary_key=True, index=True)
+    team_id = Column(Integer, nullable=False)
+    name = Column(String(100), nullable=False)
+    strategy = Column(String(100))
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+    __table_args__ = (
+        CheckConstraint("strategy IS NOT NULL", name="chk_manager_strategy"),
+    )
+
+class referee(Base):    
+    __tablename__ = "referees"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=False)
+    experience_years = Column(Integer, nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+    __table_args__ = (
+        CheckConstraint("experience_years >= 0", name="chk_referee_experience_years"),
+    )
+
+class Sponsor(Base):
+    __tablename__ = "sponsors"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=False, unique=True)
+    industry = Column(String(100))
+    sponsorship_amount = Column(Integer, nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+    __table_args__ = (
+        CheckConstraint("sponsorship_amount >= 0", name="chk_sponsor_sponsorship_amount"),
+    )
+
 
 
