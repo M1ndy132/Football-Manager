@@ -77,6 +77,19 @@ class Coach(Base):
         CheckConstraint("experience_years >= 0", name="chk_coach_experience_years"),
     )
 
+class Manager(Base):
+    __tablename__ = "managers"
+
+    id = Column(Integer, primary_key=True, index=True)
+    team_id = Column(Integer, nullable=False)
+    name = Column(String(100), nullable=False)
+    strategy = Column(String(100))
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+    __table_args__ = (
+        CheckConstraint("strategy IS NOT NULL", name="chk_manager_strategy"),
+    )
 
 class Venue(Base):
     __tablename__ = "venues"
