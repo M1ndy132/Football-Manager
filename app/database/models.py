@@ -77,21 +77,25 @@ class Coach(Base):
         CheckConstraint("experience_years >= 0", name="chk_coach_experience_years"),
     )
 
-class Manager(Base):
-    __tablename__ = "managers"
+
+class Venue(Base):
+    __tablename__ = "venues"
 
     id = Column(Integer, primary_key=True, index=True)
-    team_id = Column(Integer, nullable=False)
-    name = Column(String(100), nullable=False)
-    strategy = Column(String(100))
+    name = Column(String(150), nullable=False, unique=True)
+    city = Column(String(100), nullable=False)
+    country = Column(String(100), nullable=False)
+    capacity = Column(Integer, nullable=False)
+    built_year = Column(Integer)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     __table_args__ = (
-        CheckConstraint("strategy IS NOT NULL", name="chk_manager_strategy"),
+        CheckConstraint("capacity >= 0", name="chk_venue_capacity"),
+        CheckConstraint("built_year > 1800", name="chk_venue_built_year"),
     )
 
-class referee(Base):    
+class Referee(Base):
     __tablename__ = "referees"
 
     id = Column(Integer, primary_key=True, index=True)
