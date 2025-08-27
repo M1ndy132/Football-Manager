@@ -1,6 +1,14 @@
 ﻿from fastapi import FastAPI
-from app.routers import (auth_router, user_router, team_router,player_router, match_router, coach_router,venue_router, referee_router)
-
+from app.routers import (
+    auth_router,
+    user_router,
+    team_router,
+    player_router,
+    match_router,
+    coach_router,
+    venue_router,
+    referee_router
+)
 
 app = FastAPI(title="Football League Manager API")
 
@@ -18,6 +26,6 @@ app.include_router(referee_router.router, prefix="/api/v1", tags=["referees"])
 def root():
     return {"message": "API is working! Welcome to Football League Manager"}
 
-@app.get("health")
+@app.get("/health")
 def health_check():
     return {"status": "healthy"}
