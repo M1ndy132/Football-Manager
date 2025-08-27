@@ -71,6 +71,7 @@ class Coach(Base):
     name = Column(String(100), nullable=False)
     experience_years = Column(Integer, nullable=False)
     specialization = Column(String(100))
+    nationality = Column(String(50))
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
