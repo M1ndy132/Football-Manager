@@ -1,4 +1,4 @@
-"""
+﻿"""
 Referee service for Football League Manager.
 
 Contains business logic for referee management, including
@@ -86,3 +86,4 @@ def get_referee_statistics(db: Session, referee_id: int) -> dict:
         "red_cards_issued": 0,  # Placeholder
         "penalties_awarded": 0,  # Placeholder
     }
+

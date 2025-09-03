@@ -1,4 +1,4 @@
-# app/schemas/user.py - Temporary fix without email validation
+﻿# app/schemas/user.py - Temporary fix without email validation
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime

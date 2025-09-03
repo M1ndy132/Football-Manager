@@ -1,4 +1,4 @@
-"""
+﻿"""
 Player service for Football League Manager.
 
 Contains business logic for player management, including
@@ -123,3 +123,4 @@ def transfer_player(db: Session, player_id: int, new_team_id: int) -> Player:
     db.commit()
     db.refresh(player)
     return player
+

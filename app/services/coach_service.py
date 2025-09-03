@@ -1,4 +1,4 @@
-"""
+﻿"""
 Coach service for Football League Manager.
 
 Contains business logic for coach management, including
@@ -135,3 +135,4 @@ def transfer_coach(db: Session, coach_id: int, new_team_id: int) -> Coach:
     db.commit()
     db.refresh(coach)
     return coach
+

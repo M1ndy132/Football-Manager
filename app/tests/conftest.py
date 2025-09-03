@@ -1,4 +1,4 @@
-"""
+﻿"""
 Test configuration and fixtures for Football Manager application.
 """
 
@@ -128,3 +128,4 @@ def authenticated_headers(client, test_db, sample_user_data):
     token = response.json()["access_token"]
     
     return {"Authorization": f"Bearer {token}"}
+

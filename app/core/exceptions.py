@@ -1,4 +1,4 @@
-"""
+﻿"""
 Custom exceptions for Football League Manager API.
 
 Contains application-specific exception classes for better
@@ -88,3 +88,4 @@ def conflict_exception(message: str) -> HTTPException:
         status_code=status.HTTP_409_CONFLICT,
         detail=message
     )
+

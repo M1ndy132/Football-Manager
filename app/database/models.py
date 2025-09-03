@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, CheckConstraint, func
+﻿from sqlalchemy import Column, Integer, String, DateTime, CheckConstraint, func
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -138,6 +138,7 @@ class Sponsor(Base):
     __table_args__ = (
         CheckConstraint("sponsorship_amount > 0", name="chk_sponsor_sponsorship_amount"),
     )
+
 
 
 

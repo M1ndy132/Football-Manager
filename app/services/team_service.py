@@ -1,4 +1,4 @@
-"""
+﻿"""
 Team service for Football League Manager.
 
 Contains business logic for team management, including
@@ -79,3 +79,4 @@ def get_team_matches(db: Session, team_id: int):
     return db.query(Match).filter(
         (Match.team_a_id == team.id) | (Match.team_b_id == team.id)
     ).all()
+

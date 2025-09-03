@@ -1,4 +1,4 @@
-"""
+﻿"""
 Venue service for Football League Manager.
 
 Contains business logic for venue management, including
@@ -101,3 +101,4 @@ def get_venue_statistics(db: Session, venue_id: int) -> dict:
         "average_attendance": None,  # Placeholder
         "total_attendance": None,  # Placeholder
     }
+

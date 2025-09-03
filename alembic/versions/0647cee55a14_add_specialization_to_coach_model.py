@@ -1,4 +1,4 @@
-"""Add specialization to Coach model
+﻿"""Add specialization to Coach model
 
 Revision ID: 0647cee55a14
 Revises: 48ca8ba876c0
@@ -30,3 +30,4 @@ def downgrade() -> None:
     op.drop_column('referees', 'qualifications')
     op.drop_column('referees', 'nationality')
     # ### end Alembic commands ###
+

@@ -1,4 +1,4 @@
-"""Add specialization to Coach model
+﻿"""Add specialization to Coach model
 
 Revision ID: 9067756d7394
 Revises: c0bcb999f7cb
@@ -41,3 +41,4 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_managers_id'), table_name='managers')
     op.drop_table('managers')
     # ### end Alembic commands ###
+

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Database module for Football League Manager.
 
 Contains SQLAlchemy models, database session management,

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Integration tests for authentication endpoints.
 """
 
