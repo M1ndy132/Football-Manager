@@ -1,5 +1,9 @@
 # Football League Manager API
 
+[![CI/CD Pipeline](https://github.com/M1ndy132/Football-Manager/actions/workflows/ci.yml/badge.svg)](https://github.com/M1ndy132/Football-Manager/actions/workflows/ci.yml)
+[![Code Quality](https://github.com/M1ndy132/Football-Manager/actions/workflows/code-quality.yml/badge.svg)](https://github.com/M1ndy132/Football-Manager/actions/workflows/code-quality.yml)
+[![Demo Environment](https://github.com/M1ndy132/Football-Manager/actions/workflows/demo.yml/badge.svg)](https://github.com/M1ndy132/Football-Manager/actions/workflows/demo.yml)
+
 A comprehensive REST API for managing football leagues, teams, players, and matches built with FastAPI and SQLAlchemy.
 
 ## 🏆 Project Overview
@@ -25,6 +29,19 @@ This Football League Manager API provides a complete backend system for managing
 - **Documentation**: Auto-generated with Swagger UI
 - **Testing**: pytest with comprehensive test suite
 - **Validation**: Pydantic schemas
+- **CI/CD**: GitHub Actions with automated testing and quality checks
+
+## 🔄 Continuous Integration & Deployment
+
+The project includes comprehensive GitHub Actions workflows:
+
+- **🧪 CI/CD Pipeline**: Automated testing across Python 3.11-3.12, dependency installation, and test execution
+- **🔍 Code Quality**: Automated code formatting (black), import sorting (isort), type checking (mypy), and linting (pylint)
+- **🔒 Security Scanning**: Dependency vulnerability checks (safety) and security linting (bandit)
+- **📦 Dependency Updates**: Automated monitoring and updating of project dependencies
+- **🚀 Demo Environment**: Validation of demo environment setup and API functionality
+
+All workflows run automatically on push and pull requests to ensure code quality and functionality.
 
 ## 🚀 Quick Start
 
