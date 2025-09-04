@@ -6,11 +6,13 @@ The Football League Manager is a backend system for managing football leagues.
 It supports multiple roles (admin, coach, referee, user) and allows management of teams, players, matches, and venues.
 
 ### Tech Stack
-- **Backend**: FastAPI (Python)
-- **Database**: SQLite (development), PostgreSQL (production)
+- **Backend**: FastAPI (Python 3.11+)
+- **Database**: SQLite (development), PostgreSQL (production ready)
 - **ORM**: SQLAlchemy + Alembic (migrations)
-- **Auth**: JWT-based authentication with role-based access control
-- **Tooling**: GitHub (repos, issues, CI/CD), Pytest (testing), Black/Flake8 (linting/formatting)
+- **Auth**: JWT-based authentication with bcrypt password hashing
+- **Code Quality**: Black (formatting), isort (import sorting), flake8 (linting), mypy (type checking)
+- **Testing**: pytest with comprehensive unit and integration test suites
+- **CI/CD**: GitHub Actions with automated testing, code quality checks, and security scanning
 
 ---
 
@@ -92,7 +94,7 @@ football_manager/
 
 ---
 
-## 4. Coding Standards
+## 4. Coding Standards & Quality Tools
 - **Naming**:
   - Classes → `PascalCase` (`Team`, `PlayerService`)
   - Functions & variables → `snake_case` (`get_team`, `player_count`)
@@ -100,8 +102,14 @@ football_manager/
 - **API Design**:
   - Endpoints are **plural nouns** (`/teams`, `/matches`)
   - Use REST verbs (`GET`, `POST`, `PUT`, `DELETE`) correctly
-- **Formatting**:
-  - Use `black` for formatting, `flake8` + `isort` for linting
+- **Code Quality**:
+  - **Black**: Code formatting with 127-character line length
+  - **isort**: Import sorting with Black-compatible profile configuration
+  - **flake8**: Linting with custom configuration excluding virtual environments
+  - **mypy**: Type checking for better code reliability
+- **Configuration Files**:
+  - `.flake8`: Excludes `.venv`, `alembic`, and build directories
+  - `pyproject.toml`: isort configuration with Black compatibility profile
 
 ---
 
@@ -154,15 +162,24 @@ football_manager/
   - Require at least 1 approval before merge
   - All tests must pass
 - **CI/CD**:
-  - GitHub Actions runs linting and tests on push/PR
+  - GitHub Actions runs on Python 3.11 and 3.12
+  - Automated testing with PYTHONPATH configuration
+  - Code quality checks (black, isort, flake8, mypy)
+  - Security scanning (safety, bandit)
+  - Dependency monitoring and updates
 
 ---
 
 ## 9. Testing Strategy
-- **Unit Tests** → services and database operations
-- **Integration Tests** → routers / API endpoints
-- **Test Database** → SQLite in-memory for testing
-- **Framework** → Pytest
+- **Unit Tests** → services, database operations, and individual components
+- **Integration Tests** → routers, API endpoints, and complete workflows  
+- **Test Database** → SQLite in-memory for testing isolation
+- **Framework** → pytest with fixtures and async support
+- **Coverage** → pytest-cov for test coverage reporting
+- **Test Structure**:
+  - `app/tests/unit test/` → Component-level tests
+  - `app/tests/integration test/` → API endpoint tests
+  - `conftest.py` → Shared fixtures and test configuration
 
 ---
 

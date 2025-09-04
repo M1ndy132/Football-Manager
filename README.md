@@ -35,18 +35,24 @@ This Football League Manager API provides a complete backend system for managing
 
 The project includes comprehensive GitHub Actions workflows:
 
-- **🧪 CI/CD Pipeline**: Automated testing across Python 3.11-3.12, dependency installation, and test execution
-- **🔍 Code Quality**: Automated code formatting (black), import sorting (isort), type checking (mypy), and linting (pylint)
+- **🧪 CI/CD Pipeline**: Automated testing across Python 3.11-3.12, dependency installation, linting (flake8), and test execution with PYTHONPATH configuration
+- **🔍 Code Quality**: Automated code formatting (black), import sorting (isort), type checking (mypy), and linting (pylint) with Black-compatible configuration
 - **🔒 Security Scanning**: Dependency vulnerability checks (safety) and security linting (bandit)
 - **📦 Dependency Updates**: Automated monitoring and updating of project dependencies
 - **🚀 Demo Environment**: Validation of demo environment setup and API functionality
+
+### Code Quality Standards
+- **Black**: Code formatting with 127-character line length
+- **isort**: Import sorting with Black-compatible profile
+- **flake8**: Linting with custom configuration excluding virtual environments
+- **mypy**: Type checking for better code reliability
 
 All workflows run automatically on push and pull requests to ensure code quality and functionality.
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.12+
+- Python 3.11+ (tested on Python 3.11 and 3.12)
 - pip
 
 ### Installation
@@ -137,14 +143,23 @@ The API uses JWT (JSON Web Tokens) for authentication:
 Run the test suite:
 ```bash
 # Run all tests
-python run_tests.py
+pytest app/tests/ -v
 
-# Run specific test file
-python -m pytest "app/tests/unit test/schemas.py" -v
+# Run specific test categories
+pytest app/tests/unit\ test/ -v        # Unit tests only
+pytest app/tests/integration\ test/ -v # Integration tests only
 
 # Run with coverage
-python -m pytest --cov=app --cov-report=html
+pytest app/tests/unit\ test/ --cov=app --cov-report=html
+
+# Run specific test file
+pytest "app/tests/unit test/schemas.py" -v
 ```
+
+### Test Structure
+- **Unit Tests**: Test individual components (models, schemas, services)
+- **Integration Tests**: Test API endpoints and complete workflows
+- **Test Configuration**: Uses `conftest.py` for shared fixtures and setup
 
 ## 📱 Demo Data
 
@@ -171,6 +186,21 @@ app/
 
 ## 🔧 Development
 
+### Code Quality Tools
+```bash
+# Format code with Black
+black app/
+
+# Sort imports with isort (Black-compatible)
+isort app/
+
+# Lint with flake8
+flake8 --count --select=E9,F63,F7,F82 --show-source --statistics
+
+# Type checking with mypy
+mypy app/ --ignore-missing-imports
+```
+
 ### Running in Development Mode
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
@@ -180,6 +210,10 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 - Models are defined in `app/database/models.py`
 - Database session in `app/database/session.py`
 - Seed data script: `seed_data.py`
+
+### Configuration Files
+- `.flake8`: Flake8 linting configuration with Black compatibility
+- `pyproject.toml`: isort configuration for Black-compatible import sorting
 
 ## 📖 Documentation
 
