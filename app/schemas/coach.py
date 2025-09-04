@@ -1,4 +1,4 @@
-# app/schemas/coach.py
+﻿# app/schemas/coach.py
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime

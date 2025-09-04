@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, CheckConstraint, func
+﻿from sqlalchemy import Column, Integer, String, DateTime, CheckConstraint, func
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -60,7 +60,7 @@ class Player(Base):
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     __table_args__ = (
-        CheckConstraint("age > 0", name="chk_player_age"),
+        CheckConstraint("age >= 16 AND age <= 50", name="chk_player_age"),
     )   
 
 class Coach(Base):
@@ -106,7 +106,7 @@ class Venue(Base):
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     __table_args__ = (
-        CheckConstraint("capacity >= 0", name="chk_venue_capacity"),
+        CheckConstraint("capacity > 0", name="chk_venue_capacity"),
         CheckConstraint("built_year > 1800", name="chk_venue_built_year"),
     )
 
@@ -136,8 +136,9 @@ class Sponsor(Base):
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     __table_args__ = (
-        CheckConstraint("sponsorship_amount >= 0", name="chk_sponsor_sponsorship_amount"),
+        CheckConstraint("sponsorship_amount > 0", name="chk_sponsor_sponsorship_amount"),
     )
+
 
 
 

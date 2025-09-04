@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Seed Data Script for Football League Manager
 Populates the database with realistic demo data for presentations and testing.
@@ -293,3 +293,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Test configuration and fixtures for Football Manager application.
 """
 
@@ -14,7 +14,7 @@ from app.database.session import get_db
 from app.core.security import get_password_hash
 
 # Create test database
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")  # Changed from "session" to "function"
 def test_engine():
     """Create a test database engine using SQLite in-memory database."""
     engine = create_engine("sqlite:///:memory:", echo=False)
@@ -23,13 +23,18 @@ def test_engine():
 
 @pytest.fixture(scope="function")
 def test_db(test_engine):
-    """Create a test database session."""
+    """Create a test database session with transaction rollback."""
     TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=test_engine)
-    session = TestingSessionLocal()
+    connection = test_engine.connect()
+    transaction = connection.begin()
+    session = TestingSessionLocal(bind=connection)
+    
     try:
         yield session
     finally:
         session.close()
+        transaction.rollback()
+        connection.close()
 
 @pytest.fixture(scope="function")
 def client(test_db):
@@ -38,7 +43,7 @@ def client(test_db):
         try:
             yield test_db
         finally:
-            pass
+            test_db.close()
     
     app.dependency_overrides[get_db] = override_get_db
     with TestClient(app) as test_client:
@@ -123,3 +128,4 @@ def authenticated_headers(client, test_db, sample_user_data):
     token = response.json()["access_token"]
     
     return {"Authorization": f"Bearer {token}"}
+

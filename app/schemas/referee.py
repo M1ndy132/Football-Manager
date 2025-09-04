@@ -1,4 +1,4 @@
-# app/schemas/referee.py
+﻿# app/schemas/referee.py
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime

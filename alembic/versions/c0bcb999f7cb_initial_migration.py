@@ -1,4 +1,4 @@
-"""Initial migration
+﻿"""Initial migration
 
 Revision ID: c0bcb999f7cb
 Revises: 
@@ -56,3 +56,4 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_venues_id'), table_name='venues')
     op.drop_table('venues')
     # ### end Alembic commands ###
+
