@@ -47,12 +47,12 @@ jobs:
     
     - name: Test with pytest
       run: |
-        pytest app/tests/unit\ test/ -v --tb=short
+        pytest "app/tests/unit test/" -v --tb=short
     
     - name: Generate coverage report
       run: |
         pip install pytest-cov
-        pytest app/tests/unit\ test/ --cov=app --cov-report=xml --cov-report=html
+        pytest "app/tests/unit test/" --cov=app --cov-report=xml --cov-report=html
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
