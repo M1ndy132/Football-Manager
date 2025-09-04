@@ -4,8 +4,9 @@ Integration tests for authentication endpoints.
 
 import pytest
 from fastapi.testclient import TestClient
-from app.database.models import User
+
 from app.core.security import get_password_hash
+from app.database.models import User
 
 
 class TestAuthEndpoints:

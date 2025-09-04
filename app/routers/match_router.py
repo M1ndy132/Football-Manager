@@ -1,10 +1,11 @@
 ﻿# app/routers/match_router.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
 
-from app.database.session import get_db
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
 from app.database.models import Match, Team
+from app.database.session import get_db
 from app.schemas.match import MatchCreate, MatchResponse, MatchUpdate
 
 router = APIRouter(prefix="/matches", tags=["matches"])

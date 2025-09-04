@@ -2,16 +2,18 @@
 Test configuration and fixtures for Football Manager application.
 """
 
-import pytest
-import tempfile
 import os
+import tempfile
+
+import pytest
+from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from fastapi.testclient import TestClient
-from app.main import app
+
+from app.core.security import get_password_hash
 from app.database.models import Base
 from app.database.session import get_db
-from app.core.security import get_password_hash
+from app.main import app
 
 
 # Create test database

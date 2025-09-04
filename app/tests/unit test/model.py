@@ -2,21 +2,23 @@
 Unit tests for database models.
 """
 
-import pytest
 from datetime import datetime, timedelta
+
+import pytest
 from sqlalchemy.exc import IntegrityError
+
+from app.core.security import get_password_hash
 from app.database.models import (
-    Team,
-    User,
-    Player,
     Coach,
+    Manager,
     Match,
-    Venue,
+    Player,
     Referee,
     Sponsor,
-    Manager,
+    Team,
+    User,
+    Venue,
 )
-from app.core.security import get_password_hash
 
 
 def assert_equal(actual, expected):

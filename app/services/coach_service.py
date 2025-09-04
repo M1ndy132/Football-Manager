@@ -6,14 +6,16 @@ CRUD operations and coach-team relationships.
 """
 
 from typing import List, Optional
+
 from sqlalchemy.orm import Session
-from app.database.models import Coach, Team
-from app.schemas.coach import CoachCreate, CoachUpdate
+
 from app.core.exceptions import (
     CoachNotFoundException,
-    TeamNotFoundException,
     DuplicateResourceException,
+    TeamNotFoundException,
 )
+from app.database.models import Coach, Team
+from app.schemas.coach import CoachCreate, CoachUpdate
 
 
 def get_coach(db: Session, coach_id: int) -> Coach:

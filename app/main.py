@@ -1,14 +1,15 @@
 ﻿from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+
 from app.routers import (
     auth_router,
-    user_router,
-    team_router,
-    player_router,
-    match_router,
     coach_router,
-    venue_router,
+    match_router,
+    player_router,
     referee_router,
+    team_router,
+    user_router,
+    venue_router,
 )
 
 app = FastAPI(

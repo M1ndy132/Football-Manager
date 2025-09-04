@@ -1,10 +1,11 @@
 ﻿# app/routers/coach_router.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
 
-from app.database.session import get_db
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
 from app.database.models import Coach, Team
+from app.database.session import get_db
 from app.schemas.coach import CoachCreate, CoachResponse, CoachUpdate
 
 router = APIRouter(prefix="/coaches", tags=["coaches"])

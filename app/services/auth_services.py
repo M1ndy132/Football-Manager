@@ -7,13 +7,14 @@ authorization logic.
 
 from datetime import datetime, timedelta, timezone
 from typing import Optional
+
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from app.database.models import User
+
 from app.core.config import settings
 from app.core.exceptions import UserNotFoundException
-
+from app.database.models import User
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

@@ -1,10 +1,11 @@
 ﻿# app/routers/referee_router.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
 
-from app.database.session import get_db
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
 from app.database.models import Referee
+from app.database.session import get_db
 from app.schemas.referee import RefereeCreate, RefereeResponse, RefereeUpdate
 
 router = APIRouter(prefix="/referees", tags=["referees"])

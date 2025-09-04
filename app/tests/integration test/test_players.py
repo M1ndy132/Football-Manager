@@ -3,7 +3,8 @@ Integration tests for player endpoints.
 """
 
 import pytest
-from app.database.models import Team, Player
+
+from app.database.models import Player, Team
 
 
 class TestPlayerEndpoints:

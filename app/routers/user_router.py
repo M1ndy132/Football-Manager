@@ -1,12 +1,13 @@
 ﻿# app/routers/user_router.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
 
-from app.database.session import get_db
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
+from app.core.security import get_current_user, get_password_hash
 from app.database.models import User
+from app.database.session import get_db
 from app.schemas.user import UserCreate, UserResponse, UserUpdate
-from app.core.security import get_password_hash, get_current_user
 
 router = APIRouter(prefix="/users", tags=["users"])
 

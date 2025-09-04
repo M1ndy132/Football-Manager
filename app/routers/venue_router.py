@@ -1,10 +1,11 @@
 ﻿# app/routers/venue_router.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
 
-from app.database.session import get_db
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
 from app.database.models import Venue
+from app.database.session import get_db
 from app.schemas.venue import VenueCreate, VenueResponse, VenueUpdate
 
 router = APIRouter(prefix="/venues", tags=["venues"])

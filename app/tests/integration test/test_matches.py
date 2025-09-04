@@ -2,9 +2,11 @@
 Integration tests for match endpoints.
 """
 
-import pytest
 from datetime import datetime, timedelta
-from app.database.models import Team, Match
+
+import pytest
+
+from app.database.models import Match, Team
 
 
 class TestMatchEndpoints:

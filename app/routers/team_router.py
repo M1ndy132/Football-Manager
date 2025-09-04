@@ -1,9 +1,10 @@
-﻿from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-from typing import List
+﻿from typing import List
 
-from app.database.session import get_db
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
 from app.database.models import Team
+from app.database.session import get_db
 from app.schemas.team import TeamCreate, TeamResponse, TeamUpdate
 
 router = APIRouter(prefix="/teams", tags=["teams"])

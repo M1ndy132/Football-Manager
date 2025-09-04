@@ -1,13 +1,14 @@
 ﻿# app/routers/auth_router.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
-from sqlalchemy.orm import Session
 from datetime import timedelta
 
-from app.database.session import get_db
-from app.database.models import User
-from app.core.security import verify_password, create_access_token
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from sqlalchemy.orm import Session
+
 from app.core.config import settings
+from app.core.security import create_access_token, verify_password
+from app.database.models import User
+from app.database.session import get_db
 from app.schemas.user import Token
 
 # Change this line - use the full path for tokenUrl

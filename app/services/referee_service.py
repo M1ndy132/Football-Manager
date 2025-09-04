@@ -6,10 +6,12 @@ CRUD operations and referee scheduling.
 """
 
 from typing import List, Optional
+
 from sqlalchemy.orm import Session
-from app.database.models import Referee, Match
+
+from app.core.exceptions import DuplicateResourceException, RefereeNotFoundException
+from app.database.models import Match, Referee
 from app.schemas.referee import RefereeCreate, RefereeUpdate
-from app.core.exceptions import RefereeNotFoundException, DuplicateResourceException
 
 
 def get_referee(db: Session, referee_id: int) -> Referee:

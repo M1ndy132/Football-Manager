@@ -6,14 +6,16 @@ CRUD operations and player statistics.
 """
 
 from typing import List, Optional
+
 from sqlalchemy.orm import Session
-from app.database.models import Player, Team
-from app.schemas.player import PlayerCreate, PlayerUpdate
+
 from app.core.exceptions import (
+    DuplicateResourceException,
     PlayerNotFoundException,
     TeamNotFoundException,
-    DuplicateResourceException,
 )
+from app.database.models import Player, Team
+from app.schemas.player import PlayerCreate, PlayerUpdate
 
 
 def get_player(db: Session, player_id: int) -> Player:

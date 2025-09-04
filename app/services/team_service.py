@@ -6,10 +6,12 @@ CRUD operations and team-related business rules.
 """
 
 from typing import List, Optional
+
 from sqlalchemy.orm import Session
+
+from app.core.exceptions import DuplicateResourceException, TeamNotFoundException
 from app.database.models import Team
 from app.schemas.team import TeamCreate, TeamUpdate
-from app.core.exceptions import TeamNotFoundException, DuplicateResourceException
 
 
 def get_team(db: Session, team_id: int) -> Team:

@@ -1,4 +1,4 @@
-﻿from sqlalchemy import Column, Integer, String, DateTime, CheckConstraint, func
+﻿from sqlalchemy import CheckConstraint, Column, DateTime, Integer, String, func
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()

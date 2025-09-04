@@ -6,10 +6,12 @@ CRUD operations and venue scheduling.
 """
 
 from typing import List, Optional
+
 from sqlalchemy.orm import Session
-from app.database.models import Venue, Match
+
+from app.core.exceptions import DuplicateResourceException, VenueNotFoundException
+from app.database.models import Match, Venue
 from app.schemas.venue import VenueCreate, VenueUpdate
-from app.core.exceptions import VenueNotFoundException, DuplicateResourceException
 
 
 def get_venue(db: Session, venue_id: int) -> Venue:

@@ -6,21 +6,13 @@ Populates the database with realistic demo data for presentations and testing.
 
 import asyncio
 from datetime import datetime, timedelta
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.database.models import (
-    Base,
-    Team,
-    User,
-    Match,
-    Player,
-    Coach,
-    Manager,
-    Venue,
-    Referee,
-    Sponsor,
-)
+
 from app.core.security import get_password_hash
+from app.database.models import (Base, Coach, Manager, Match, Player, Referee,
+                                 Sponsor, Team, User, Venue)
 
 # Database configuration
 DATABASE_URL = "sqlite:///./football.db"

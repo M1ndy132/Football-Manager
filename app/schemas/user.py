@@ -1,7 +1,8 @@
 ﻿# app/schemas/user.py - Temporary fix without email validation
-from pydantic import BaseModel, Field
-from typing import Optional
 from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel, Field
 
 
 # Change EmailStr to str to avoid email validation temporarily

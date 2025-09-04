@@ -1,10 +1,11 @@
 ﻿# app/routers/player_router.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
 
-from app.database.session import get_db
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
 from app.database.models import Player, Team
+from app.database.session import get_db
 from app.schemas.player import PlayerCreate, PlayerResponse, PlayerUpdate
 
 router = APIRouter(prefix="/players", tags=["players"])
