@@ -36,7 +36,7 @@ def create_team(db: Session, team: TeamCreate) -> Team:
     existing_team = get_team_by_name(db, team.name)
     if existing_team:
         raise DuplicateResourceException(f"Team with name '{team.name}' already exists")
-    
+
     db_team = Team(**team.model_dump())
     db.add(db_team)
     db.commit()
@@ -47,11 +47,11 @@ def create_team(db: Session, team: TeamCreate) -> Team:
 def update_team(db: Session, team_id: int, team_update: TeamUpdate) -> Team:
     """Update an existing team."""
     db_team = get_team(db, team_id)
-    
+
     update_data = team_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(db_team, field, value)
-    
+
     db.commit()
     db.refresh(db_team)
     return db_team
@@ -68,6 +68,7 @@ def delete_team(db: Session, team_id: int) -> bool:
 def get_team_players(db: Session, team_id: int):
     """Get all players for a specific team."""
     from app.database.models import Player
+
     team = get_team(db, team_id)
     return db.query(Player).filter(Player.team_id == team.id).all()
 
@@ -75,8 +76,10 @@ def get_team_players(db: Session, team_id: int):
 def get_team_matches(db: Session, team_id: int):
     """Get all matches for a specific team."""
     from app.database.models import Match
-    team = get_team(db, team_id)
-    return db.query(Match).filter(
-        (Match.team_a_id == team.id) | (Match.team_b_id == team.id)
-    ).all()
 
+    team = get_team(db, team_id)
+    return (
+        db.query(Match)
+        .filter((Match.team_a_id == team.id) | (Match.team_b_id == team.id))
+        .all()
+    )

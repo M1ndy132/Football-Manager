@@ -35,8 +35,10 @@ def create_venue(db: Session, venue: VenueCreate) -> Venue:
     # Check if venue with same name already exists
     existing_venue = get_venue_by_name(db, venue.name)
     if existing_venue:
-        raise DuplicateResourceException(f"Venue with name '{venue.name}' already exists")
-    
+        raise DuplicateResourceException(
+            f"Venue with name '{venue.name}' already exists"
+        )
+
     db_venue = Venue(**venue.model_dump())
     db.add(db_venue)
     db.commit()
@@ -47,12 +49,12 @@ def create_venue(db: Session, venue: VenueCreate) -> Venue:
 def update_venue(db: Session, venue_id: int, venue_update: VenueUpdate) -> Venue:
     """Update an existing venue."""
     db_venue = get_venue(db, venue_id)
-    
+
     update_data = venue_update.model_dump(exclude_unset=True)
-    
+
     for field, value in update_data.items():
         setattr(db_venue, field, value)
-    
+
     db.commit()
     db.refresh(db_venue)
     return db_venue
@@ -71,12 +73,15 @@ def get_venues_by_city(db: Session, city: str) -> List[Venue]:
     return db.query(Venue).filter(Venue.city == city).all()
 
 
-def get_venues_by_capacity_range(db: Session, min_capacity: int, max_capacity: int) -> List[Venue]:
+def get_venues_by_capacity_range(
+    db: Session, min_capacity: int, max_capacity: int
+) -> List[Venue]:
     """Get venues within capacity range."""
-    return db.query(Venue).filter(
-        Venue.capacity >= min_capacity,
-        Venue.capacity <= max_capacity
-    ).all()
+    return (
+        db.query(Venue)
+        .filter(Venue.capacity >= min_capacity, Venue.capacity <= max_capacity)
+        .all()
+    )
 
 
 def get_venue_matches(db: Session, venue_id: int) -> List[Match]:
@@ -89,7 +94,7 @@ def get_venue_statistics(db: Session, venue_id: int) -> dict:
     """Get venue statistics and details."""
     venue = get_venue(db, venue_id)
     matches = get_venue_matches(db, venue_id)
-    
+
     return {
         "venue_id": venue.id,
         "name": venue.name,
@@ -101,4 +106,3 @@ def get_venue_statistics(db: Session, venue_id: int) -> dict:
         "average_attendance": None,  # Placeholder
         "total_attendance": None,  # Placeholder
     }
-

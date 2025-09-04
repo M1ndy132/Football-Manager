@@ -9,7 +9,11 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 from app.database.models import Coach, Team
 from app.schemas.coach import CoachCreate, CoachUpdate
-from app.core.exceptions import CoachNotFoundException, TeamNotFoundException, DuplicateResourceException
+from app.core.exceptions import (
+    CoachNotFoundException,
+    TeamNotFoundException,
+    DuplicateResourceException,
+)
 
 
 def get_coach(db: Session, coach_id: int) -> Coach:
@@ -36,7 +40,7 @@ def get_coaches_by_team(db: Session, team_id: int) -> List[Coach]:
     team = db.query(Team).filter(Team.id == team_id).first()
     if not team:
         raise TeamNotFoundException(f"Team with id {team_id} not found")
-    
+
     return db.query(Coach).filter(Coach.team_id == team_id).all()
 
 
@@ -47,16 +51,19 @@ def create_coach(db: Session, coach: CoachCreate) -> Coach:
         team = db.query(Team).filter(Team.id == coach.team_id).first()
         if not team:
             raise TeamNotFoundException(f"Team with id {coach.team_id} not found")
-    
+
     # Check if coach with same name already exists in the same team
     if coach.team_id:
-        existing_coach = db.query(Coach).filter(
-            Coach.name == coach.name,
-            Coach.team_id == coach.team_id
-        ).first()
+        existing_coach = (
+            db.query(Coach)
+            .filter(Coach.name == coach.name, Coach.team_id == coach.team_id)
+            .first()
+        )
         if existing_coach:
-            raise DuplicateResourceException(f"Coach '{coach.name}' already exists in this team")
-    
+            raise DuplicateResourceException(
+                f"Coach '{coach.name}' already exists in this team"
+            )
+
     db_coach = Coach(**coach.model_dump())
     db.add(db_coach)
     db.commit()
@@ -67,18 +74,20 @@ def create_coach(db: Session, coach: CoachCreate) -> Coach:
 def update_coach(db: Session, coach_id: int, coach_update: CoachUpdate) -> Coach:
     """Update an existing coach."""
     db_coach = get_coach(db, coach_id)
-    
+
     update_data = coach_update.model_dump(exclude_unset=True)
-    
+
     # Verify team exists if team_id is being updated
-    if 'team_id' in update_data and update_data['team_id']:
-        team = db.query(Team).filter(Team.id == update_data['team_id']).first()
+    if "team_id" in update_data and update_data["team_id"]:
+        team = db.query(Team).filter(Team.id == update_data["team_id"]).first()
         if not team:
-            raise TeamNotFoundException(f"Team with id {update_data['team_id']} not found")
-    
+            raise TeamNotFoundException(
+                f"Team with id {update_data['team_id']} not found"
+            )
+
     for field, value in update_data.items():
         setattr(db_coach, field, value)
-    
+
     db.commit()
     db.refresh(db_coach)
     return db_coach
@@ -105,7 +114,7 @@ def get_coaches_by_nationality(db: Session, nationality: str) -> List[Coach]:
 def get_coach_statistics(db: Session, coach_id: int) -> dict:
     """Get coach statistics and profile information."""
     coach = get_coach(db, coach_id)
-    
+
     return {
         "coach_id": coach.id,
         "name": coach.name,
@@ -118,21 +127,20 @@ def get_coach_statistics(db: Session, coach_id: int) -> dict:
         "wins": 0,  # Placeholder
         "losses": 0,  # Placeholder
         "draws": 0,  # Placeholder
-        "win_percentage": 0.0  # Placeholder
+        "win_percentage": 0.0,  # Placeholder
     }
 
 
 def transfer_coach(db: Session, coach_id: int, new_team_id: int) -> Coach:
     """Transfer a coach to a new team."""
     coach = get_coach(db, coach_id)
-    
+
     # Verify new team exists
     new_team = db.query(Team).filter(Team.id == new_team_id).first()
     if not new_team:
         raise TeamNotFoundException(f"Team with id {new_team_id} not found")
-    
-    setattr(coach, 'team_id', new_team_id)
+
+    setattr(coach, "team_id", new_team_id)
     db.commit()
     db.refresh(coach)
     return coach
-

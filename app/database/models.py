@@ -3,6 +3,7 @@ from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
+
 class Team(Base):
     __tablename__ = "teams"
 
@@ -14,9 +15,7 @@ class Team(Base):
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
-    __table_args__ = (
-        CheckConstraint("founded_year > 1800", name="chk_founded_year"),
-    )
+    __table_args__ = (CheckConstraint("founded_year > 1800", name="chk_founded_year"),)
 
 
 class User(Base):
@@ -28,7 +27,8 @@ class User(Base):
     full_name = Column(String(100))
     hashed_password = Column(String(255), nullable=False)
     created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())  
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
 
 class Match(Base):
     __tablename__ = "matches"
@@ -46,7 +46,8 @@ class Match(Base):
     __table_args__ = (
         CheckConstraint("score_team_a >= 0", name="chk_score_team_a"),
         CheckConstraint("score_team_b >= 0", name="chk_score_team_b"),
-    )       
+    )
+
 
 class Player(Base):
     __tablename__ = "players"
@@ -55,13 +56,14 @@ class Player(Base):
     team_id = Column(Integer, nullable=False)
     name = Column(String(100), nullable=False)
     position = Column(String(50), nullable=False)
-    age = Column(Integer, nullable=False)   
+    age = Column(Integer, nullable=False)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     __table_args__ = (
         CheckConstraint("age >= 16 AND age <= 50", name="chk_player_age"),
-    )   
+    )
+
 
 class Coach(Base):
     __tablename__ = "coaches"
@@ -79,6 +81,7 @@ class Coach(Base):
         CheckConstraint("experience_years >= 0", name="chk_coach_experience_years"),
     )
 
+
 class Manager(Base):
     __tablename__ = "managers"
 
@@ -92,6 +95,7 @@ class Manager(Base):
     __table_args__ = (
         CheckConstraint("strategy IS NOT NULL", name="chk_manager_strategy"),
     )
+
 
 class Venue(Base):
     __tablename__ = "venues"
@@ -110,6 +114,7 @@ class Venue(Base):
         CheckConstraint("built_year > 1800", name="chk_venue_built_year"),
     )
 
+
 class Referee(Base):
     __tablename__ = "referees"
 
@@ -125,6 +130,7 @@ class Referee(Base):
         CheckConstraint("experience_years >= 0", name="chk_referee_experience_years"),
     )
 
+
 class Sponsor(Base):
     __tablename__ = "sponsors"
 
@@ -136,9 +142,7 @@ class Sponsor(Base):
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     __table_args__ = (
-        CheckConstraint("sponsorship_amount > 0", name="chk_sponsor_sponsorship_amount"),
+        CheckConstraint(
+            "sponsorship_amount > 0", name="chk_sponsor_sponsorship_amount"
+        ),
     )
-
-
-
-

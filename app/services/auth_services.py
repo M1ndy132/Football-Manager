@@ -44,17 +44,23 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
     else:
-        expire = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    
+        expire = datetime.now(timezone.utc) + timedelta(
+            minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
+        )
+
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    encoded_jwt = jwt.encode(
+        to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM
+    )
     return encoded_jwt
 
 
 def verify_token(token: str) -> Optional[str]:
     """Verify a JWT token and return the username."""
     try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        payload = jwt.decode(
+            token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
+        )
         username = payload.get("sub")
         if username is None:
             return None
@@ -68,10 +74,9 @@ def get_current_user(db: Session, token: str) -> User:
     username = verify_token(token)
     if username is None:
         raise UserNotFoundException("Invalid authentication credentials")
-    
+
     user = db.query(User).filter(User.username == username).first()
     if user is None:
         raise UserNotFoundException("User not found")
-    
-    return user
 
+    return user

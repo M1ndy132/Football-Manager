@@ -35,8 +35,10 @@ def create_referee(db: Session, referee: RefereeCreate) -> Referee:
     # Check if referee with same name already exists
     existing_referee = get_referee_by_name(db, referee.name)
     if existing_referee:
-        raise DuplicateResourceException(f"Referee with name '{referee.name}' already exists")
-    
+        raise DuplicateResourceException(
+            f"Referee with name '{referee.name}' already exists"
+        )
+
     db_referee = Referee(**referee.model_dump())
     db.add(db_referee)
     db.commit()
@@ -44,15 +46,17 @@ def create_referee(db: Session, referee: RefereeCreate) -> Referee:
     return db_referee
 
 
-def update_referee(db: Session, referee_id: int, referee_update: RefereeUpdate) -> Referee:
+def update_referee(
+    db: Session, referee_id: int, referee_update: RefereeUpdate
+) -> Referee:
     """Update an existing referee."""
     db_referee = get_referee(db, referee_id)
-    
+
     update_data = referee_update.model_dump(exclude_unset=True)
-    
+
     for field, value in update_data.items():
         setattr(db_referee, field, value)
-    
+
     db.commit()
     db.refresh(db_referee)
     return db_referee
@@ -74,7 +78,7 @@ def get_referees_by_nationality(db: Session, nationality: str) -> List[Referee]:
 def get_referee_statistics(db: Session, referee_id: int) -> dict:
     """Get referee statistics and profile information."""
     referee = get_referee(db, referee_id)
-    
+
     return {
         "referee_id": referee.id,
         "name": referee.name,
@@ -86,4 +90,3 @@ def get_referee_statistics(db: Session, referee_id: int) -> dict:
         "red_cards_issued": 0,  # Placeholder
         "penalties_awarded": 0,  # Placeholder
     }
-
