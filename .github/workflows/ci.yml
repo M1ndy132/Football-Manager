@@ -86,7 +86,7 @@ jobs:
       run: bandit -r app/ -f json -o bandit-report.json || true
     
     - name: Upload security scan results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: security-scan-results
         path: bandit-report.json
@@ -129,7 +129,7 @@ jobs:
           README.md
     
     - name: Upload deployment artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: football-manager-deployment
         path: football-manager-${{ github.sha }}.tar.gz
