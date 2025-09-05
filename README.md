@@ -238,3 +238,5 @@ Educational project - created for academic demonstration.
 ---
 
 **🎯 Ready for Demo**: This project demonstrates comprehensive backend development skills including API design, database modeling, authentication, and professional documentation.
+
+PLEASE NOTE: FABYAN MADE NO CONTRIBUTION TO THIS PROJECT. -SINCERELY REMAINDING GROUP MEMBERS
